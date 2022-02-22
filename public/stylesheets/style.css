@@ -1,0 +1,654 @@
+*{
+    padding: 0;
+    margin: 0;
+    --bg-color:#f6f6f6;
+    box-sizing: border-box;
+
+}
+
+.form-row{
+    display: flex;
+}
+html{
+    scroll-behavior: smooth;
+
+}
+#myImage{
+    visibility: visible;
+}
+body{
+    
+    font-size: 25px;
+    color: black;
+    overflow-x: hidden;
+}
+ul {
+    
+    list-style: none;
+  }
+  .nav-links{
+    display: flex;
+    align-items: end;
+  }
+header ,.home{
+    background-color: var(--bg-color);
+}
+
+
+.home{
+    height: auto;
+}
+nav{
+    padding: 20px;
+    position: relative;
+}
+.nav-links-container{
+    
+display: flex;
+justify-content: end;
+}
+
+.top-figure-1{
+    position: absolute;
+    top:0px;
+    left: 200px;
+    width: 40px;
+    height: 40px;
+}
+.logo ,.introduction{
+    font-family: Georgia, 'Times New Roman', Times, serif ;
+}
+.logo{
+    top:25px;
+    left: 50px;
+  position: absolute;
+  border-style: none;
+    font-weight: 800;
+    background-color: var(--bg-color);
+}
+
+
+.nav-links-container ul li a{
+    margin: 10px 20px 0px 20px;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 19px;
+} 
+
+.home-container{
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.introduction-paragraph-container{
+    padding: 120px 0 0 50px;
+
+}
+.introduction-paragraph{
+    font-size: 30px;
+    font-weight: 500;
+    margin: 15px 0px 25px 0px;
+}
+.introduction{
+    font-weight: bolder;
+    font-size: 50px;
+}
+.what-i-do{
+    font-size: 18px;
+}
+.hire-me-container{
+    padding-top: 60px;
+}
+.resume,.hire-me,.submit-button{
+    border-style: none;
+    padding: 10px 25px;
+    background-color: black;
+font-size: 20px;
+    color: white;
+    font-weight: 600;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.my-profile-image{
+    width: 35%;
+    
+    height: auto;
+}
+.middle-figure-0{
+height: 40px;
+width: 40px;
+top:200px;
+right:500px;
+position: absolute;
+}
+.middle-figure-1{
+    height: 40px;
+    width: 40px;
+    top:350px;
+    right:550px;
+    position: absolute;
+    }
+.middle-figure-2{
+    height: 24px;
+width: 25px;
+top:50px;
+right:400px;
+position: absolute;
+}
+.middle-figure-3{
+    height: 24px;
+width: 25px;
+bottom: 30px;
+left: 200px;
+position: absolute;
+}
+.skills-expeirence{
+    padding: 50px;
+    margin: auto;
+    width: 70%;
+    display: flex;
+    gap: 100px;
+}
+
+
+.expeirence{
+padding: 40px;
+margin: auto;
+width: 62%;
+
+border-radius: 5px;
+
+}
+
+.experince-paragraph{
+    margin-top: 20px;
+}
+.services-container{
+    padding: 100px;
+    margin: auto;
+    width: 70%;
+}
+.services-navs-container{
+    margin: auto;
+    width: 70%;
+    margin-bottom: 30px;
+}
+.services-navs {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+.services-image{
+    width: 300px;
+    height: 200px;
+}
+footer a ,li a{
+    color: black;
+}
+a{
+    text-decoration: none;
+
+}
+.all-services{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+}
+.contact-us-container{
+  margin: auto;
+  padding: 120px;
+    background-color: #f5f5f5;
+    display: grid;
+    grid-template-columns: 40% 55%;
+    gap: 5px;
+    width: 100%;
+}
+.form-container{
+  
+    width: 100%;
+    border:  3px solid rgb(145, 135, 135); 
+
+    background-color: #e9e9e9;
+}
+.contact_form{
+padding: 20px;
+}
+.form-row .form-group {
+    width: 50%;
+    padding: 0 15px; }
+
+.form-group {
+  margin-bottom: 23px;
+  position: relative; }
+
+input,select{
+   display: block;
+  width: 100%;
+    height: 40px;
+  padding: 5px;
+    border-radius: 5px;
+    border-style: none;
+}
+select{
+    background-color: white;
+    border-style: none;
+height: 40px;
+}
+textarea{
+    border-radius: 5px;
+    border-style: none;
+    resize: none;
+    padding: 10px;
+}
+.map-container{
+margin-left: 100px;
+}
+.icons-container{
+   
+    background-color: var(--bg-color);
+}
+footer{
+
+  
+    background-color: var(--bg-color);
+}
+iframe{
+    width:100%;
+     height:700px;
+
+}
+.burger-container{
+    display: none;
+    padding: 20px;
+}
+.footer-container{
+    /* margin: auto;
+    width: 50%; */
+    padding-top: 20px;
+}
+.footer-fluid{
+    display: flex;
+
+justify-content: space-evenly;
+padding: 50px 10px 20px 10px;
+}
+
+.item.social>a {
+    font-size: 20px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(189, 189, 189, 0.993);
+ 
+  margin-bottom: 5px;
+}
+.col.item.social a {
+    margin-right: 10px;
+ 
+}
+.copyrights-container{
+    margin: auto;
+    padding-top: 20px;
+    width: 20%;
+}
+.all-services-caption{
+    opacity: 70%;
+}
+.resume-container{
+    margin: auto;
+    margin-top: 40px;
+    width: 50%;
+display: flex;
+justify-content: center;
+padding: 10px;
+}
+.resume{
+    border-radius: 3px;
+}
+/* Media Query
+**Responsiveness
+*/
+@media only screen and (max-width: 600px) 
+{
+    .home-container{
+
+        flex-direction: column-reverse;
+        width: 100%;
+
+    }
+  
+    .introduction-paragraph-container{
+        padding: 20px 10px 0px 20px;
+    max-width: 90%;
+    }
+    .introduction{
+        font-size: 35px;
+    }
+   
+    .introduction-paragraph{
+        font-size: 20px;
+    }
+    .my-profile-image{
+        width: 100%;
+        height: auto;
+     display: none;
+        
+    }
+     .hire-me-container{
+        width: 50%;
+margin: auto;
+padding-bottom: 20px;
+    }
+    .resume{
+        font-size: 18px;
+    }
+    
+    .skills-expeirence{
+        padding: 50px;
+        width: 100%;
+        flex-direction: column;
+    
+    }
+    .skills-img{
+        width: 100%;
+    }
+    .skills1,.skills-mobile1,.skills-mobile2,.skills2{
+   
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .expeirence{
+        width: 100%;
+padding:0px;
+    }
+        .experince-paragraph{
+            padding: 25px;
+        }
+        .services-navs a{
+            font-size: 15px;
+        }
+        .services-container{
+            padding: 20px;
+            width: 100%;
+        }
+        .services-navs-container{
+            margin: auto;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        .services-navs {
+            display: flex;
+            flex-direction: row;
+        }
+        .services-image{
+            width: 150px;
+            height: 100px;
+        }
+        .contact-us-container{
+            padding: 10px;
+              display: grid;
+              grid-template-columns: 100%;
+         
+          }
+          .form-container{
+            
+              width: 100%;
+              padding: 0px 0px;
+          
+          }
+          input,select{
+              width: 150px;
+              height: 30px;
+        
+          }
+          label{
+              font-size: 20px;
+          }
+          select{
+            width: 150px;
+          height: 30px;
+          }
+       
+          .map-container{
+          margin-left: 10px;
+          }
+          iframe{
+            width:100%;
+             height:400px;
+              
+        }
+       .logo, .hide-figure{
+            display: none;
+        }
+   
+        .burger-container{
+            display: block;
+        }
+        .submit-btn-container{
+    
+            margin: auto;
+            width: 50%;
+        }
+        .form-row {
+            flex-direction: column;
+            margin: 0px; }
+        
+          .form-row .form-group {
+            width: 100%;
+            padding: 0px; }
+            .footer-fluid{
+                height: 400px;
+            padding: 50px 5px 5px 5px;
+            }
+            .copyrights-container{
+                padding-bottom: 10px;
+                width: 50%;
+            }
+            .col.item.social a {
+                margin-right: 5px;
+             
+            }
+            .footer-container span,p{
+               font-size: 20px;
+            }
+            .icons-container-fluid{
+                width: 100%;
+            }
+     
+              
+              header li {
+                text-transform: uppercase;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 1.5rem;
+                padding: 1.5rem;
+              }
+              .nav-links{
+                align-items: center;
+              }
+              
+              
+            
+              nav {
+                position: relative;
+              }
+              
+              .hamburger {
+                padding: 0.6rem;
+                z-index: 1000;
+                position: absolute;
+                cursor: pointer;
+                left: 5%;
+                top:2%;
+              }
+              
+              .nav-links {
+                flex-direction: column;
+                height: 100vh;
+                width: 100%;
+                position: fixed;
+                top: 0;
+                right: 0;
+                background-color: var(--bg-color);
+                justify-content: center;
+                clip-path: circle(100px at 90% -20%);
+                -webkit-clip-path: circle(100px at 90% -20%);
+                transition: all 2s ease-out;
+                pointer-events: none;
+              }
+              
+              header li:hover {
+                font-size: 1.8rem;
+              }
+              
+              .nav-links.open {
+                clip-path: circle(1000px at 90% -10%);
+                -webkit-clip-path: circle(1000px at 90% -10%);
+                pointer-events: all;
+              }
+              
+              .nav-links li {
+                opacity: 0;
+              }
+              
+              
+              
+              .nav-links li:nth-child(1) {
+                transition: all 0.5s ease 0.2s;
+              }
+              .nav-links li:nth-child(2) {
+                transition: all 0.5s ease 0.4s;
+              }
+              .nav-links li:nth-child(3) {
+                transition: all 0.5s ease 0.6s;
+              }
+              .nav-links li:nth-child(4) {
+                transition: all 0.5s ease 0.8s;
+              }
+              li.fade {
+                opacity: 1;
+              }
+              
+              
+              
+              /* titles end */
+              
+              /* header start */
+              
+              .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: var(--bg-color);
+                color: var(--white-color);
+                padding: 1.2rem;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 10000;
+              }
+              
+} 
+
+
+.Profile-animation {
+
+    position: relative;
+    animation-name: mymove;
+    animation-duration: 4s;
+    animation-delay: -2s;
+    float: right;
+
+}
+
+@keyframes mymove {
+    50% {
+        left: 500px;
+        top: 0px;
+    }
+
+    75% {
+        left: 0px;
+        top: 0px;
+    }
+
+}
+#button{
+    position: absolute;
+    right: 200px;
+}
+
+/* Switch button Style*/
+.Theme-text {
+    padding: 10px;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked+.slider {
+    background-color: rgb(241, 228, 228);
+  }
+  
+  input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+   /* theme*/
+   .theme-mode {
+    background-color: black;
+    color: white;
+}
