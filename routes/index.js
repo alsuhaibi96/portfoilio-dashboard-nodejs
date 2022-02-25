@@ -1,7 +1,12 @@
 var express = require('express');
 var router = express.Router();
+const assert = require("assert")
 var mongoose = require('mongoose');
 var experienceModel = require('../models/experience');
+var skillsModel=require('../models/skills');
+var qualificationsModel=require('../models/qualifications');
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Abdulrahman Alsuhaibi' });
@@ -23,24 +28,33 @@ router.get('/courses', function(req, res, next) {
 
 /* GET qualification dashboard page. */
 router.get('/qualification', function(req, res, next) {
-  res.render('qualification', { title: 'Qualifications' });
+qualificationsModel.find().then((result)=>{
+
+  res.render('qualification', { title: 'Qualifications',qualifications:result });
+})
 });
 
 /* GET dashboard page. */
 router.get('/skills', function(req, res, next) {
-  res.render('skills', { title: 'Skills' });
+skillsModel.find().then((result)=>{
+  res.render('skills', { title: 'Skills' ,skills:result});
+
+})
 });
 
 /* GET edit experience dashboard page. */
-router.get('/experience-details', function(req, res, next) {
-  res.render('experience-details', { title: 'Edit experience' });
-});
+router.get("/experience", (req, res, next)=>{
+  experienceModel.find().then((result) =>{
+    res.render("experience", {title: "Experience", data: result})
+  })
+})
 
+//##  Experience methods (get,add,delete) ##//
+
+
+//Add new experience to the view in the data tables section
 router.post('/add_experience', function(req, res, next) {
      
-  //No errors were found.  Passed Validation!
-       
-   
     var experienceDetails = new experienceModel({
       experience: req.body.experience,
       year: req.body.year,
@@ -49,95 +63,98 @@ router.post('/add_experience', function(req, res, next) {
      
     experienceDetails .save();
           
- 
-         
-      // res.render('experience', { 
-      //     title: 'Experience',
-      //     experience: req.body.experience,
-      //     year: req.body.year,
-      //     company_name: req.body.company_name,
-      // })
+
       res.redirect('/experience');
   
 });
-router.get('/experience', (req, res) => {
 
-  experienceModel.find((err, docs) => {
-    if (!err) {
-        res.render("experience", {
-            data: docs
-        });
-    } else {
-        console.log('Failed to retrieve the  List: ' + err);
-    }
-});
+//Edit  experience on the view in the data tables section
 
-});
-
-
-router.get('/experience/:id', (req, res) => {
-  const id = req.params.id;
-  experienceModel.findById(id)
-    .then(result => {
-      res.render('experience-details', { exp: result, title: 'experience' });
-    })
-    .catch(err => {
-      console.log(err);
+    router.post('/edit_experience', function(req, res, next){
+      var item = {
+        experience: req.body.experience,
+        year: req.body.year,
+        company_name:req.body.company_name
+      };
+      var id = req.body.id;
+      experienceModel.updateOne({"_id": id}, {$set: item}, item, function(err, result){
+        assert.equal(null, err);
+        console.log("item updated");
+      })
+      res.redirect('experience');
     });
-});
 
-router.get('/experience', (req, res) => {
+//Delete experience item
 
-  experienceModel.find((err, docs) => {
-    if (!err) {
-        res.render("experience", {
-            data: docs
-        });
-    } else {
-        console.log('Failed to retrieve the  List: ' + err);
-    }
-});
-
-});
-
-router.delete('/experience/:id', (req, res) => {
-  const id = req.params.id;
-  
-  experienceModel.findByIdAndDelete(id)
-    .then(result => {
-      res.json({ redirect: '/experience' });
+  router.get('/delete_experience/:id',function(req,res,next){
+    experienceModel.deleteOne({"_id":req.params.id},function(err,result){
+      console.log("item deleted");
     })
-    .catch(err => {
-      console.log(err);
-    });
+  res.redirect('/experience');
+
+  });
+
+//##  Skills methods (get,add,delete) ##//
+
+//Add new skill to the view in the data tables section
+router.post('/add_qualification', function(req, res, next) {
+     
+  var qualificationDetails = new qualificationsModel({
+    qualification: req.body.qualification,
+    date: req.body.date,
+    university: req.body.university,
+  });
+   
+  qualificationDetails.save();
+        
+
+    res.redirect('/qualification');
+
 });
 
-// var objectID = require('mongodb').ObjectID;
+//Edit Skill on the view in the data tables section
 
-// router.get('/edit/:id', (req, res) => {    
-//   var id = req.params.id;
-//   var o_id = new objectID(id);
-//   experienceModel.find({_id:o_id}).toArray((err, result) => {
-//      if (err) return console.log(err)
-//      console.log(result);
-//      res.render('edit-experience',{experiences: result});  
-//   });
-//   console.log(req.params.id);
-//   });
-  
-//   router.post('/edit',(req, res) => {
-//     experienceModel.update ({ _id: objectID(req.body._id) }, {$set: {
-//     experience: req.body.experience,
-//       year: req.body.year
-//    }
-//    }, function (err, result) {
-//         if (err) {
-//         console.log(err);
-//       } else {
-//        console.log("Post Updated successfully");
-//        res.render('edit-experience');
-//    }
-//   });});
-  
+router.post('/edit_qualification', function(req, res, next){
+  var item = {
+    qualification: req.body.qualification,
+    date: req.body.date,
+    university:req.body.university
+  };
+  var id = req.body.id;
+  qualificationsModel.updateOne({"_id": id}, {$set: item}, item, function(err, result){
+    assert.equal(null, err);
+    console.log("item updated");
+  })
+  res.redirect('/qualification');
+});
 
+//Delete skill item
+
+router.get('/delete_qualification/:id',function(req,res,next){
+  qualificationsModel.deleteOne({"_id":req.params.id},function(err,result){
+    console.log("item deleted");
+  })
+res.redirect('/qualification');
+
+});
+ 
+
+
+//##  Qualifications methods (get,add,delete) ##//
+
+//Add new skill to the view in the data tables section
+router.post('/add_skill', function(req, res, next) {
+     
+  var skillDetails = new skillsModel({
+    name: req.body.name,
+    description: req.body.description,
+    level: req.body.level,
+  });
+   
+  skillDetails.save();
+        
+
+    res.redirect('/skills');
+
+});
 module.exports = router;

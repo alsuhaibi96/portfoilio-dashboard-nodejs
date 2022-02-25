@@ -27,61 +27,97 @@
                     <td>مستوى المهارة</td>
                     <td>التحكم</td>
                 </tr>
+                <% let i =1; if(skills.length){ %>
+                <% for(let item =0; item< skills.length; item++){ %>
                 <tr>
-                    <td>1</td>
-                    <td>Laravel PHP Framework</td>
-                    <td>مطور مواقع</td>
-                    <td>80%</td>
+                    <td><%= i++ %></td>
+                    <td><%= skills[item].name %></td>
+                    <td><%= skills[item].description %></td>
+                    <td><%= skills[item].level %></td>
                     <td>
-                        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal"><i
-                                class="fa fa-edit"></i> تعديل</a>
-                        <a href="#" class="btn btn-danger confirm"> <i class="fa fa-close"></i> حذف</a>
+                        <a href="#" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#editModal<%= skills[item]._id %>"><i class="fa fa-edit"></i> تعديل</a>
+                        <a href="/delete_skill/<%=skills[item]._id%>" class="btn btn-danger confirm"> <i
+                                class="fa fa-close"></i> حذف</a>
                     </td>
                 </tr>
+
+
+                 <!-- Modal Edit-->
+    <div class="modal fade" id="editModal<%=skills[item]._id %>" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">تعديل المهارة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="edit_skill" method="post">
+                    <input  type="hidden" name="id" value="<%=skills[item]._id%>">
+                        <div class="mb-3 row">
+                            <label for="Experience" class="col-sm-3 col-form-label">اسم المهارة</label>
+                            <div class="col-sm-9">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="skill" 
+                                    name="name"
+                                    placeholder="ادخل اسم المهارة" 
+                                    value="<%=skills[item].name%>"
+                                   >
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="years" class="col-sm-3 col-form-label">الوصف</label>
+                            <div class="col-sm-9">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="description" 
+                                    name="description"
+                                    placeholder="ادخل الوصف" 
+                                  value="<%=skills[item].description%>"
+                                   >
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="company" class="col-sm-3 col-form-label">مستوى المهارة</label>
+                            <div class="col-sm-9">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="level" 
+                                    name="level"
+                                    placeholder="ادخل المستوى" 
+                                  value="<%=skills[item].level%>"
+
+                                   >
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">تحديث</button>
+
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+            <%}
+            
+            
+                }
+
+            else{
+            %>
+
                 <tr>
-                    <td>2</td>
-                    <td>Flutter</td>
-                    <td>مطور هواتف</td>
-                    <td>90%</td>
-                    <td>
-                        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal"><i
-                                class="fa fa-edit"></i> تعديل</a>
-                        <a href="#" class="btn btn-danger confirm"> <i class="fa fa-close"></i> حذف</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Flutter</td>
-                    <td>مطور هواتف</td>
-                    <td>90%</td>
-                    <td>
-                        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal"><i
-                                class="fa fa-edit"></i> تعديل</a>
-                        <a href="#" class="btn btn-danger confirm"> <i class="fa fa-close"></i> حذف</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Flutter</td>
-                    <td>مطور هواتف</td>
-                    <td>90%</td>
-                    <td>
-                        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal"><i
-                                class="fa fa-edit"></i> تعديل</a>
-                        <a href="#" class="btn btn-danger confirm"> <i class="fa fa-close"></i> حذف</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Flutter</td>
-                    <td>مطور هواتف</td>
-                    <td>90%</td>
-                    <td>
-                        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal"><i
-                                class="fa fa-edit"></i> تعديل</a>
-                        <a href="#" class="btn btn-danger confirm"> <i class="fa fa-close"></i> حذف</a>
-                    </td>
-                </tr>
+                                <td colspan="5">لايوجد مهارات</td>
+                             </tr>
+
+            <%}%>
+
             </table>
         </div>
         <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
@@ -98,86 +134,36 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="skills.html" method="post">
+                    <form action="add_skill" method="post">
                         <div class="mb-3 row">
-                            <label for="Experience" class="col-sm-3 col-form-label">اسم المهارة</label>
+                            <label for="skill" class="col-sm-3 col-form-label">اسم المهارة</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="experience" placeholder="ادخل المهارة" >
+                                <input type="text" class="form-control" id="skill" name="name" placeholder="ادخل المهارة" required>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="years" class="col-sm-3 col-form-label">الوصف</label>
+                            <label for="description" class="col-sm-3 col-form-label">الوصف</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="experience" placeholder="ادخل الوصف" >
+                                <input type="text" class="form-control" id="description"  name="description" placeholder="ادخل الوصف" required >
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="company" class="col-sm-3 col-form-label">مستوى المهارة</label>
+                            <label for="level" class="col-sm-3 col-form-label">مستوى المهارة</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="company" placeholder="ادخل المستوى اوالنسبة" >
+                                <input type="text" class="form-control" id="level" name="level" placeholder="ادخل المستوى اوالنسبة" required >
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">اضافة</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-                            <button type="button" class="btn btn-primary">اضافة</button>
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Edit-->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">تعديل المهارة</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="skills.html" method="post">
-                        <div class="mb-3 row">
-                            <label for="Experience" class="col-sm-3 col-form-label">اسم المهارة</label>
-                            <div class="col-sm-9">
-                                <input 
-                                    type="text" 
-                                    class="form-control" 
-                                    id="skill" 
-                                    placeholder="ادخل اسم المهارة" 
-                                   >
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="years" class="col-sm-3 col-form-label">الوصف</label>
-                            <div class="col-sm-9">
-                                <input 
-                                    type="text" 
-                                    class="form-control" 
-                                    id="description" 
-                                    placeholder="ادخل الوصف" 
-                                   >
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="company" class="col-sm-3 col-form-label">مستوى المهارة</label>
-                            <div class="col-sm-9">
-                                <input 
-                                    type="text" 
-                                    class="form-control" 
-                                    id="level" 
-                                    placeholder="ادخل المستوى" 
-                                   >
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-                            <button type="button" class="btn btn-primary">تحديث</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
     <!-- End Skills Page -->
     <%-include('./partials/importing-files.ejs');%>

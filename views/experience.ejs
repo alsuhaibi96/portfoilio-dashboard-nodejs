@@ -41,26 +41,72 @@
                     </td>
                 </tr> -->
                
-                    <tbody>
+                    <tbody >
                         <% if(data.length){
                   
                         for(var i = 0; i< data.length; i++) {%>  
-                        <tr>
-                          <td scope="row"><%= (i+1) %></td>
-                          <td><%=   experiencedata= data[i].experience%></td>
-                          <td><%= data[i].year%></td>
-                          <td><%= data[i].company_name%></td>
-                          <td>
-                        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal"><i
+                        <tr >
+                          <td scope="row" class="text-black bg-white"><%= (i+1) %></td>
+                          <td class="text-black bg-white"><%=   experiencedata= data[i].experience%></td>
+                          <td class="text-black bg-white"><%= data[i].year%></td>
+                          <td class="text-black bg-white"><%= data[i].company_name%></td>
+                          <td  class="text-black bg-white">
+                        <a  href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal<%=data[i]._id%>"><i
                                 class="fa fa-edit"></i> تعديل</a>
-                                <a class="delete btn-danger" data-doc="<%= data._id %>">delete</a>
+                                <a href="/delete_experience/<%= data[i]._id %>" class="btn btn-danger confirm" data-doc="">
+                                <i class="fa fa-delete">حذف</i></a>
                     </td>
                         </tr>
+
+
+                        <!-- Modal Edit-->
+    <div class="modal fade" id="editModal<%=data[i]._id%>" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">تعديل الخبرات</h5>
+                   
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/edit_experience" method="post">
+                        <input type="hidden" name="id" value="<%= data[i]._id %>">
+                        <div class="mb-3 row">
+                            <label for="Experience" class="col-sm-3 col-form-label" >التفاصيل</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="experience" name="experience" value="<%=data[i].experience%>">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="years" class="col-sm-3 col-form-label">عدد السنوات</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="years"  name="year"  value="<%=data[i].year%> ">
+                                
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="company" class="col-sm-3 col-form-label">اسم الشركة</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="company" name="company_name" value="<%=data[i].company_name%>" >
+                            </div>
+                        </div>
+                   
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">تحديث</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                          
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
                         <% }
                                  
                          }else{ %>
                              <tr>
-                                <td colspan="3">No user</td>
+                                <td colspan="5">لايوجد خبرات</td>
                              </tr>
                           <% } %>    
                         
@@ -87,73 +133,37 @@
                 <div class="modal-body">
                     <form action="add_experience" method="post">
                         <div class="mb-3 row">
-                            <label for="Experience" class="col-sm-3 col-form-label">التفاصيل</label>
+                            <label for="Experience" class="col-sm-3  col-form-label">التفاصيل</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="experience" placeholder="ادخل تفاصيل الخبرات" name="experience">
-                            </div>
+                                <input required type="text" class="form-control " id="experience" placeholder="ادخل تفاصيل الخبرات" name="experience">
+                           
+                                </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="years" class="col-sm-3 col-form-label">عدد السنوات</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="years" placeholder="ادخل عدد سنوات الخبرة" name="year">
+                                <input required type="number" class="form-control" id="years" placeholder="ادخل عدد سنوات الخبرة" name="year">
                             
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="company" class="col-sm-3 col-form-label">اسم الشركة</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="company" placeholder="ادخل اسم الشركة" name="company_name">
+                                <input required type="text" class="form-control" id="company" placeholder="ادخل اسم الشركة" name="company_name">
                             </div>
                         </div>
                       
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
                             <button type="submit" class="btn btn-primary">اضافة</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Edit-->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">تعديل الخبرات</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/edit" method="post">
-                        <div class="mb-3 row">
-                            <label for="Experience" class="col-sm-3 col-form-label">التفاصيل</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="experience" name="experience" value="">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="years" class="col-sm-3 col-form-label">عدد السنوات</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="years"  name="year"  value=" ">
-                                
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="company" class="col-sm-3 col-form-label">اسم الشركة</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="company" name="company_name" value="" >
-                            </div>
-                        </div>
-                   
-                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-                            <button type="submit" class="btn btn-primary">تحديث</button>
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+ 
 <%-include('./partials/importing-files.ejs');%>
 <script>
     const trashcan = document.querySelector('a.delete');
