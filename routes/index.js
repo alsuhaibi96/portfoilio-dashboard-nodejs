@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const assert = require("assert")
-var mongoose = require('mongoose');
 var experienceModel = require('../models/experience');
 var skillsModel=require('../models/skills');
 var qualificationsModel=require('../models/qualifications');
-
+var coursesModel=require('../models/courses');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,14 +15,14 @@ router.get('/home', function(req, res, next) {
   res.render('home', { title: 'Dashboard' });
 });
 
-/* GET experience dashboard page. */
-// router.get('/experience', function(req, res, next) {
-//   res.render('experience', { title: 'Experience' });
-// });
 
 /* GET courses dashboard page. */
 router.get('/courses', function(req, res, next) {
-  res.render('courses', { title: 'Courses' });
+coursesModel.find().then((result)=>{
+  res.render('courses', { title: 'Courses',courses:result });
+
+})
+
 });
 
 /* GET qualification dashboard page. */
@@ -94,9 +93,9 @@ router.post('/add_experience', function(req, res, next) {
 
   });
 
-//##  Skills methods (get,add,delete) ##//
+//##  Qualifications methods (get,add,delete) ##//
 
-//Add new skill to the view in the data tables section
+//Add new qualification to the view in the data tables section
 router.post('/add_qualification', function(req, res, next) {
      
   var qualificationDetails = new qualificationsModel({
@@ -112,7 +111,7 @@ router.post('/add_qualification', function(req, res, next) {
 
 });
 
-//Edit Skill on the view in the data tables section
+//Edit qualification on the view in the data tables section
 
 router.post('/edit_qualification', function(req, res, next){
   var item = {
@@ -128,10 +127,11 @@ router.post('/edit_qualification', function(req, res, next){
   res.redirect('/qualification');
 });
 
-//Delete skill item
+//Delete qualification item
 
 router.get('/delete_qualification/:id',function(req,res,next){
-  qualificationsModel.deleteOne({"_id":req.params.id},function(err,result){
+  qualificationsModel.deleteOne({"_id":req.params.id},
+  function(err,result){
     console.log("item deleted");
   })
 res.redirect('/qualification');
@@ -140,7 +140,9 @@ res.redirect('/qualification');
  
 
 
-//##  Qualifications methods (get,add,delete) ##//
+
+
+//##  Skills methods (get,add,delete) ##//
 
 //Add new skill to the view in the data tables section
 router.post('/add_skill', function(req, res, next) {
@@ -157,4 +159,77 @@ router.post('/add_skill', function(req, res, next) {
     res.redirect('/skills');
 
 });
+module.exports = router;
+
+//Edit a skill  in the data tables section
+router.post('/edit_skill', function(req, res, next){
+  var item = {
+    name: req.body.name,
+    description: req.body.description,
+level:req.body.level
+  };
+  var id = req.body.id;
+  skillsModel.updateOne({"_id": id}, {$set: item}, item, function(err, result){
+    assert.equal(null, err);
+    console.log("item updated");
+  })
+  res.redirect('/skills');
+});
+
+
+
+//Delete a skill from the skills in the data tables section
+
+router.get('/delete_skill/:id',function(req,res,next)
+
+{
+  skillsModel.deleteOne({"_id":req.params.id},function(err,result){
+    console.log("item deleted");
+  })
+  res.redirect('/skills');
+});
+
+
+//##  Courses methods (get,add,delete) ##//
+
+//Add new  Course to the view in the data tables section
+router.post('/add_course', function(req, res, next) {
+     
+  var courseDetails = new coursesModel({
+    course_name: req.body.course_name,
+    course_average: req.body.course_average,
+    course_center_name: req.body.course_center_name,
+    course_date:req.body.course_date
+  });
+   
+  courseDetails.save();
+    res.redirect('/courses');
+
+});
+
+//Edit a course in the data tables section
+router.post('/edit_course', function(req, res, next){
+  var item = {
+    course_name: req.body.course_name,
+    course_average: req.body.course_average,
+course_center_name:req.body.course_center_name,
+course_date:req.body.course_date
+  };
+  var id = req.body.id;
+  coursesModel.updateOne({"_id": id}, {$set: item}, item, function(err, result){
+    assert.equal(null, err);
+    console.log("item updated");
+  })
+  res.redirect('/courses');
+});
+
+//Delete a single course 
+router.get('/delete_course/:id',function(req,res,next){
+  coursesModel.deleteOne({"_id":req.params.id},function(err,result){
+console.log("item deleted");
+  })
+
+  res.redirect('/courses');
+})
+
 module.exports = router;
