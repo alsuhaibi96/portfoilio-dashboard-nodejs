@@ -7,18 +7,22 @@
 
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark pb-5" >
 
     <!-- start setting box -->
 
     <%-include('./partials/sideslide.ejs');%>
 
-   
+
+    <%-include('./partials/dashboard-header.ejs');%>
 
     <!-- Start Experience Page  -->
     <h1 class="text-center text-white">اعدادت الخبرات</h1>
-    <div class="container pt-5">
-        <div class="table-responsive">
+    <div class="container pt-5 "  style="width: 100%">
+        <a href="#" class="btn btn-sm btn-primary mb-2 " data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+            class="fa fa-plus"></i> اضافة جديد</a>
+        <div class="table-responsive scrollable-div" >
+           
             <table class="main-table manage-members text-center table table-bordered">
                 <tr>
                     <td>ID</td>
@@ -115,9 +119,9 @@
               
         
             </table>
+            
         </div>
-        <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-            class="fa fa-plus"></i> اضافة جديد</a>
+       
     </div>
     <!-- End Experience Page -->
 
@@ -162,7 +166,8 @@
             </div>
         </div>
     </div>
- 
+    <%-include('./partials/flash-messages.ejs');%>
+
 <%-include('./partials/importing-files.ejs');%>
 
 </body>

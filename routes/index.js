@@ -1,10 +1,17 @@
 var express = require('express');
 var router = express.Router();
-const assert = require("assert")
+const assert = require("assert");
+
+
+
 var experienceModel = require('../models/experience');
 var skillsModel=require('../models/skills');
 var qualificationsModel=require('../models/qualifications');
 var coursesModel=require('../models/courses');
+
+  
+const app = express();
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,7 +26,7 @@ router.get('/home', function(req, res, next) {
 /* GET courses dashboard page. */
 router.get('/courses', function(req, res, next) {
 coursesModel.find().then((result)=>{
-  res.render('courses', { title: 'Courses',courses:result });
+  res.render('courses', { title: 'Courses',courses:result, message:req.flash("course-message"),messageEdit:req.flash("course-message-edit"),messageDelete:req.flash("course-message-delete")});
 
 })
 
@@ -29,14 +36,14 @@ coursesModel.find().then((result)=>{
 router.get('/qualification', function(req, res, next) {
 qualificationsModel.find().then((result)=>{
 
-  res.render('qualification', { title: 'Qualifications',qualifications:result });
+  res.render('qualification', { title: 'Qualifications',qualifications:result ,message:req.flash("qualification-message"),messageEdit:req.flash("qualification-message-edit"),messageDelete:req.flash("qualification-message-delete")});
 })
 });
 
 /* GET dashboard page. */
 router.get('/skills', function(req, res, next) {
 skillsModel.find().then((result)=>{
-  res.render('skills', { title: 'Skills' ,skills:result});
+  res.render('skills', { title: 'Skills' ,skills:result,message:req.flash("skill-message"),messageEdit:req.flash("skill-message-edit"),messageDelete:req.flash("skill-message-delete")});
 
 })
 });
@@ -44,7 +51,7 @@ skillsModel.find().then((result)=>{
 /* GET edit experience dashboard page. */
 router.get("/experience", (req, res, next)=>{
   experienceModel.find().then((result) =>{
-    res.render("experience", {title: "Experience", data: result})
+    res.render("experience", {title: "Experience", data: result,message:req.flash("experience-message"),messageEdit:req.flash("experience-message-edit"),messageDelete:req.flash("experience-message-delete")})
   })
 })
 
@@ -62,7 +69,7 @@ router.post('/add_experience', function(req, res, next) {
      
     experienceDetails .save();
           
-
+    req.flash('experience-message', 'تم الاضافة بنجاح!');
       res.redirect('/experience');
   
 });
@@ -80,6 +87,7 @@ router.post('/add_experience', function(req, res, next) {
         assert.equal(null, err);
         console.log("item updated");
       })
+      req.flash('experience-message-edit', 'تم التعديل بنجاح!');
       res.redirect('experience');
     });
 
@@ -89,6 +97,7 @@ router.post('/add_experience', function(req, res, next) {
     experienceModel.deleteOne({"_id":req.params.id},function(err,result){
       console.log("item deleted");
     })
+    req.flash('experience-message-delete', 'تم الحذف!');
   res.redirect('/experience');
 
   });
@@ -105,6 +114,7 @@ router.post('/add_qualification', function(req, res, next) {
   });
    
   qualificationDetails.save();
+    req.flash('qualification-message', 'تم الاضافة بنجاح!');
         
 
     res.redirect('/qualification');
@@ -124,6 +134,8 @@ router.post('/edit_qualification', function(req, res, next){
     assert.equal(null, err);
     console.log("item updated");
   })
+  req.flash('qualification-message-edit', 'تم التعديل بنجاح!');
+
   res.redirect('/qualification');
 });
 
@@ -134,6 +146,8 @@ router.get('/delete_qualification/:id',function(req,res,next){
   function(err,result){
     console.log("item deleted");
   })
+  req.flash('qualification-message-delete', 'تم الحذف!');
+
 res.redirect('/qualification');
 
 });
@@ -155,7 +169,7 @@ router.post('/add_skill', function(req, res, next) {
    
   skillDetails.save();
         
-
+  req.flash('skill-message', 'تم الاضافة بنجاح!');
     res.redirect('/skills');
 
 });
@@ -173,6 +187,7 @@ level:req.body.level
     assert.equal(null, err);
     console.log("item updated");
   })
+  req.flash('skill-message-edit', 'تم التعديل بنجاح!');
   res.redirect('/skills');
 });
 
@@ -186,6 +201,8 @@ router.get('/delete_skill/:id',function(req,res,next)
   skillsModel.deleteOne({"_id":req.params.id},function(err,result){
     console.log("item deleted");
   })
+  req.flash('skill-message-delete', 'تم الحذف!');
+
   res.redirect('/skills');
 });
 
@@ -203,6 +220,8 @@ router.post('/add_course', function(req, res, next) {
   });
    
   courseDetails.save();
+  req.flash('course-message', 'تم الاضافة بنجاح!');
+
     res.redirect('/courses');
 
 });
@@ -220,6 +239,8 @@ course_date:req.body.course_date
     assert.equal(null, err);
     console.log("item updated");
   })
+  req.flash('course-message-edit', 'تم التعديل بنجاح!');
+
   res.redirect('/courses');
 });
 
@@ -228,6 +249,7 @@ router.get('/delete_course/:id',function(req,res,next){
   coursesModel.deleteOne({"_id":req.params.id},function(err,result){
 console.log("item deleted");
   })
+  req.flash('course-message-delete', 'تم الحذف!');
 
   res.redirect('/courses');
 })

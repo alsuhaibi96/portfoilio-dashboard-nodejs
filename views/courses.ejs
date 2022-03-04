@@ -18,7 +18,9 @@
             <!-- Start Qualification Page  -->
             <h1 class="text-center text-white">اعدادت الدورات التدريبية </h1>
             <div class="container pt-5 ">
-                <div class="table-responsive">
+                <a href="#" class="btn btn-sm btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                    class="fa fa-plus"></i> اضافة جديد</a>
+                <div class="table-responsive scrollable-div">
                     <table class="main-table manage-members text-center table table-bordered ">
                         <tr>
                             <td>ID</td>
@@ -131,8 +133,7 @@
 
                     </table>
                 </div>
-                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                        class="fa fa-plus"></i> اضافة جديد</a>
+         
             </div>
 
 
@@ -190,7 +191,9 @@
           
 
             <!-- End Qualification Page -->
-            <%-include('./partials/importing-files.ejs');%>
+            <%-include('./partials/flash-messages.ejs');%>
+
+<%-include('./partials/importing-files.ejs');%>
 
 
 </html>
