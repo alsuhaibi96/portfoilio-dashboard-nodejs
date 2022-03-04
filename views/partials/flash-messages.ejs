@@ -1,18 +1,23 @@
 <%if(message.length>0){ %>
-    <div style="position: absolute; bottom: 10px; left:120px" class="bg-light col-3 p-2 rounded pt3" >
+    <div style="position: absolute; bottom: 10px; left:120px" class="col-3 p-2 rounded pt3  alert alert-success alert-dismissible fade show"  role="alert">
         <div class="row">
       <div class=" col-6 " style="height: 30px;width: 30px;">
         <svg style="color: white;background-color: rgb(2, 145, 2); border-radius: 50px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
         </div>
+      
             
         <p class="text-black col-6">    <%=message%> </p>
             
+      
             </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    
+            </button>
     </div>
 <% }
 
 else if(messageEdit.length>0){%>
-<div style="position: absolute; bottom: 10px; left:120px" class="bg-light col-3  p-2 rounded" >
+<div style="position: absolute; bottom: 10px; left:120px" class="alert alert-primary alert-dismissible fade show col-3  p-2 rounded" role="alert" >
         <div class="row">
       <div class=" col-6 " style="height: 30px;width: 30px;">
         <svg style="color: white;background-color: blue; border-radius: 50px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -21,12 +26,15 @@ else if(messageEdit.length>0){%>
         <p class="text-black col-6">    <%=messageEdit%> </p>
             
             </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    
+  </button>
     </div>
 
 <%}
 else if (messageDelete.length>0){%>
-<div style="position: absolute; bottom: 10px; left:120px" class="bg-light col-3 p-2 rounded" >
-        <div class="row">
+<div style="position: absolute; bottom: 10px; left:120px" class="alert alert-danger alert-dismissible fade show col-3 p-2 rounded" role="alert" >
+        <div class="row ">
       <div class=" col-6 " style="height: 30px;width: 30px;">
         <svg style="color: white;background-color: red; border-radius: 50px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
         </div>
@@ -34,5 +42,8 @@ else if (messageDelete.length>0){%>
         <p class="text-black col-6 " >    <%=messageDelete%> </p>
             
             </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    
+  </button>
     </div>
 <%}%>

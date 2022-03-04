@@ -3,7 +3,7 @@ var router = express.Router();
 const assert = require("assert");
 
 
-
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 var experienceModel = require('../models/experience');
 var skillsModel=require('../models/skills');
 var qualificationsModel=require('../models/qualifications');
@@ -14,17 +14,16 @@ const app = express();
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/',forwardAuthenticated,function(req, res, next) {
   res.render('index', { title: 'Abdulrahman Alsuhaibi' });
 });
 /* GET dashboard page. */
-router.get('/home', function(req, res, next) {
-  res.render('home', { title: 'Dashboard' });
+router.get('/home',ensureAuthenticated ,function(req, res, next) {
+  res.render('home', { title: 'Dashboard'});
 });
 
-
 /* GET courses dashboard page. */
-router.get('/courses', function(req, res, next) {
+router.get('/courses', ensureAuthenticated,function(req, res, next) {
 coursesModel.find().then((result)=>{
   res.render('courses', { title: 'Courses',courses:result, message:req.flash("course-message"),messageEdit:req.flash("course-message-edit"),messageDelete:req.flash("course-message-delete")});
 
@@ -33,7 +32,7 @@ coursesModel.find().then((result)=>{
 });
 
 /* GET qualification dashboard page. */
-router.get('/qualification', function(req, res, next) {
+router.get('/qualification', ensureAuthenticated,function(req, res, next) {
 qualificationsModel.find().then((result)=>{
 
   res.render('qualification', { title: 'Qualifications',qualifications:result ,message:req.flash("qualification-message"),messageEdit:req.flash("qualification-message-edit"),messageDelete:req.flash("qualification-message-delete")});
@@ -41,7 +40,7 @@ qualificationsModel.find().then((result)=>{
 });
 
 /* GET dashboard page. */
-router.get('/skills', function(req, res, next) {
+router.get('/skills',ensureAuthenticated ,function(req, res, next) {
 skillsModel.find().then((result)=>{
   res.render('skills', { title: 'Skills' ,skills:result,message:req.flash("skill-message"),messageEdit:req.flash("skill-message-edit"),messageDelete:req.flash("skill-message-delete")});
 
@@ -49,7 +48,7 @@ skillsModel.find().then((result)=>{
 });
 
 /* GET edit experience dashboard page. */
-router.get("/experience", (req, res, next)=>{
+router.get("/experience",ensureAuthenticated ,(req, res, next)=>{
   experienceModel.find().then((result) =>{
     res.render("experience", {title: "Experience", data: result,message:req.flash("experience-message"),messageEdit:req.flash("experience-message-edit"),messageDelete:req.flash("experience-message-delete")})
   })
